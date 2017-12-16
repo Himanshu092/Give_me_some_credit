@@ -1,0 +1,1 @@
+Folder contains training dataset of Give_me_some_credit competition from Kaggle.Data contains 1,50,000 rows and has 12 features.Included in the folder is a data dictionary which has information on all the features,again this is provided along with dataset from Kaggle. 
