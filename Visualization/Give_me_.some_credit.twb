@@ -1,0 +1,1249 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 10400.17.0915.2112                               -->
+<workbook original-version='10.4' source-build='10.4.0 (10400.17.0915.2112)' source-platform='win' version='10.4' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='Give_Me_Some_Credit' inline='true' name='federated.17vcvdy19p9fje162rdc510xlyw0' version='10.4'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='Give_Me_Some_Credit' name='textscan.1kxyw6d12b72qp17t6uh21jjtvsq'>
+            <connection class='textscan' directory='C:/Users/admin/Desktop/MIT Course/Kaggle/Give_me_some_credit' filename='Give_Me_Some_Credit.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.1kxyw6d12b72qp17t6uh21jjtvsq' name='Give_Me_Some_Credit.csv' table='[Give_Me_Some_Credit#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='integer' name='ID' ordinal='0' />
+            <column datatype='integer' name='SeriousDlqin2yrs' ordinal='1' />
+            <column datatype='real' name='RevolvingUtilizationOfUnsecuredLines' ordinal='2' />
+            <column datatype='integer' name='age' ordinal='3' />
+            <column datatype='integer' name='NumberOfTime30-59DaysPastDueNotWorse' ordinal='4' />
+            <column datatype='real' name='DebtRatio' ordinal='5' />
+            <column datatype='real' name='MonthlyIncome' ordinal='6' />
+            <column datatype='integer' name='NumberOfOpenCreditLinesAndLoans' ordinal='7' />
+            <column datatype='integer' name='NumberOfTimes90DaysLate' ordinal='8' />
+            <column datatype='integer' name='NumberRealEstateLoansOrLines' ordinal='9' />
+            <column datatype='integer' name='NumberOfTime60-89DaysPastDueNotWorse' ordinal='10' />
+            <column datatype='integer' name='NumberOfDependents' ordinal='11' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>ID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[ID]</local-name>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias>ID</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;sint64&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>SeriousDlqin2yrs</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[SeriousDlqin2yrs]</local-name>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias>SeriousDlqin2yrs</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;sint64&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>RevolvingUtilizationOfUnsecuredLines</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[RevolvingUtilizationOfUnsecuredLines]</local-name>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias>RevolvingUtilizationOfUnsecuredLines</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>age</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[age]</local-name>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias>age</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;sint64&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NumberOfTime30-59DaysPastDueNotWorse</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[NumberOfTime30-59DaysPastDueNotWorse]</local-name>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias>NumberOfTime30-59DaysPastDueNotWorse</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;sint64&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>DebtRatio</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[DebtRatio]</local-name>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias>DebtRatio</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MonthlyIncome</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[MonthlyIncome]</local-name>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias>MonthlyIncome</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NumberOfOpenCreditLinesAndLoans</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[NumberOfOpenCreditLinesAndLoans]</local-name>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias>NumberOfOpenCreditLinesAndLoans</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;sint64&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NumberOfTimes90DaysLate</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[NumberOfTimes90DaysLate]</local-name>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias>NumberOfTimes90DaysLate</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;sint64&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NumberRealEstateLoansOrLines</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[NumberRealEstateLoansOrLines]</local-name>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias>NumberRealEstateLoansOrLines</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;sint64&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NumberOfTime60-89DaysPastDueNotWorse</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[NumberOfTime60-89DaysPastDueNotWorse]</local-name>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias>NumberOfTime60-89DaysPastDueNotWorse</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;sint64&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>NumberOfDependents</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[NumberOfDependents]</local-name>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias>NumberOfDependents</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;sint64&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Give_Me_Some_Credit.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column aggregation='None' caption='Age_bin' datatype='integer' name='[Age (bin)]' role='dimension' type='ordinal'>
+        <calculation class='bin' decimals='1' formula='[age]' peg='0' size='10' />
+      </column>
+      <column caption='Debt Ratio' datatype='real' name='[DebtRatio]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[ID]' role='dimension' type='ordinal' />
+      <column caption='Monthly Income' datatype='real' name='[MonthlyIncome]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Number Of Dependents' datatype='integer' name='[NumberOfDependents]' role='measure' type='quantitative' />
+      <column caption='Number Of Open Credit Lines And Loans' datatype='integer' name='[NumberOfOpenCreditLinesAndLoans]' role='measure' type='quantitative' />
+      <column caption='Number Real Estate Loans Or Lines' datatype='integer' name='[NumberRealEstateLoansOrLines]' role='measure' type='quantitative' />
+      <column caption='Revolving Utilization Of Unsecured Lines' datatype='real' name='[RevolvingUtilizationOfUnsecuredLines]' role='measure' type='quantitative' />
+      <column aggregation='None' caption='SeriousDlqin2yrs (bin)' datatype='integer' name='[SeriousDlqin2yrs (bin)]' role='dimension' type='ordinal'>
+        <calculation class='bin' decimals='0' formula='[SeriousDlqin2yrs]' peg='0' size='1' />
+      </column>
+      <column datatype='integer' name='[SeriousDlqin2yrs]' role='measure' type='quantitative' />
+      <column caption='Age' datatype='integer' name='[age]' role='measure' type='quantitative' />
+      <extract count='95095' enabled='false' units='records'>
+        <connection class='dataengine' dbname='C:/Users/admin/Documents/My Tableau Repository/Datasources/Give_Me_Some_Credit.twb' schema='Extract' tablename='Extract' update-time='12/16/2017 09:04:17 AM'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <calculations>
+            <calculation column='[Age (bin)]' formula='SYS_NUMBIN([age],10)' />
+            <calculation column='[Number of Records]' formula='1' />
+            <calculation column='[SeriousDlqin2yrs (bin)]' formula='SYS_NUMBIN([SeriousDlqin2yrs],1)' />
+          </calculations>
+          <refresh>
+            <refresh-event add-from-file-path='' increment-value='%null%' refresh-type='create' rows-inserted='95095' timestamp-start='2017-12-16 09:04:17.024' />
+          </refresh>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>DebtRatio</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[DebtRatio]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>DebtRatio</remote-alias>
+              <ordinal>0</ordinal>
+              <family>Give_Me_Some_Credit.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>75255</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>33961138.480681978</statistic>
+                <statistic aggregation='Avg' datatype='real'>357.12853967802698</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>329664.0</statistic>
+                <statistic aggregation='Stdev' datatype='real'>2157.6601589556931</statistic>
+                <statistic aggregation='StdevP' datatype='real'>2157.6488141645295</statistic>
+                <statistic aggregation='Var' datatype='real'>4655497.3615447059</statistic>
+                <statistic aggregation='VarP' datatype='real'>4655448.4052656004</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>454838357890.14148</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>ID</remote-name>
+              <remote-type>3</remote-type>
+              <local-name>[ID]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>ID</remote-alias>
+              <ordinal>1</ordinal>
+              <family>Give_Me_Some_Credit.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>95095</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>4521577060.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>47548.0</statistic>
+                <statistic aggregation='Min' datatype='integer'>1</statistic>
+                <statistic aggregation='Max' datatype='integer'>95095</statistic>
+                <statistic aggregation='Stdev' datatype='real'>27451.706261481577</statistic>
+                <statistic aggregation='StdevP' datatype='real'>27451.561922775909</statistic>
+                <statistic aggregation='Var' datatype='real'>753596176.66666675</statistic>
+                <statistic aggregation='VarP' datatype='real'>753588252.00000012</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+                <statistic aggregation='Median' datatype='integer'>47548</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>286654420872820.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='string' name='DebugRemoteMetadata (ordered)'>&quot;asc&quot;</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (sort-position)'>0</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (sort-sense)'>&quot;asc&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (unique)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint32&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>MonthlyIncome</remote-name>
+              <remote-type>4</remote-type>
+              <local-name>[MonthlyIncome]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>MonthlyIncome</remote-alias>
+              <ordinal>2</ordinal>
+              <family>Give_Me_Some_Credit.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>11582</approx-count>
+              <contains-null>true</contains-null>
+              <statistics>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>3008750.0</statistic>
+                <statistic aggregation='Count' datatype='integer'>76252</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (comparable)'>true</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;array&quot;</attribute>
+                <attribute datatype='boolean' name='DebugRemoteMetadata (distinct)'>true</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>2</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;float&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Number of Records</remote-name>
+              <remote-type>16</remote-type>
+              <local-name>[Number of Records]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Number of Records</remote-alias>
+              <ordinal>3</ordinal>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Min' datatype='integer'>1</statistic>
+                <statistic aggregation='Max' datatype='integer'>1</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+                <statistic aggregation='Median' datatype='integer'>1</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='string' name='DebugRemoteMetadata (ordered)'>&quot;asc&quot;</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint8&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>NumberOfDependents</remote-name>
+              <remote-type>16</remote-type>
+              <local-name>[NumberOfDependents]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>NumberOfDependents</remote-alias>
+              <ordinal>4</ordinal>
+              <family>Give_Me_Some_Credit.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>true</contains-null>
+              <statistics>
+                <statistic aggregation='Max' datatype='integer'>20</statistic>
+                <statistic aggregation='Count' datatype='integer'>92591</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint8&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>NumberOfOpenCreditLinesAndLoans</remote-name>
+              <remote-type>16</remote-type>
+              <local-name>[NumberOfOpenCreditLinesAndLoans]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>NumberOfOpenCreditLinesAndLoans</remote-alias>
+              <ordinal>5</ordinal>
+              <family>Give_Me_Some_Credit.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>56</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>802590.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>8.4398759135601242</statistic>
+                <statistic aggregation='Min' datatype='integer'>0</statistic>
+                <statistic aggregation='Max' datatype='integer'>58</statistic>
+                <statistic aggregation='Stdev' datatype='real'>5.1322264115350356</statistic>
+                <statistic aggregation='StdevP' datatype='real'>5.132199426730871</statistic>
+                <statistic aggregation='Var' datatype='real'>26.339747939257787</statistic>
+                <statistic aggregation='VarP' datatype='real'>26.339470955736683</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>9278512.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint8&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>NumberOfTime30-59DaysPastDueNotWorse</remote-name>
+              <remote-type>16</remote-type>
+              <local-name>[NumberOfTime30-59DaysPastDueNotWorse]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>NumberOfTime30-59DaysPastDueNotWorse</remote-alias>
+              <ordinal>6</ordinal>
+              <family>Give_Me_Some_Credit.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>15</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Min' datatype='integer'>0</statistic>
+                <statistic aggregation='Max' datatype='integer'>98</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint8&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>NumberOfTime60-89DaysPastDueNotWorse</remote-name>
+              <remote-type>16</remote-type>
+              <local-name>[NumberOfTime60-89DaysPastDueNotWorse]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>NumberOfTime60-89DaysPastDueNotWorse</remote-alias>
+              <ordinal>7</ordinal>
+              <family>Give_Me_Some_Credit.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>13</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Min' datatype='integer'>0</statistic>
+                <statistic aggregation='Max' datatype='integer'>98</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint8&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>NumberOfTimes90DaysLate</remote-name>
+              <remote-type>16</remote-type>
+              <local-name>[NumberOfTimes90DaysLate]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>NumberOfTimes90DaysLate</remote-alias>
+              <ordinal>8</ordinal>
+              <family>Give_Me_Some_Credit.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>17</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Min' datatype='integer'>0</statistic>
+                <statistic aggregation='Max' datatype='integer'>98</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint8&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>NumberRealEstateLoansOrLines</remote-name>
+              <remote-type>16</remote-type>
+              <local-name>[NumberRealEstateLoansOrLines]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>NumberRealEstateLoansOrLines</remote-alias>
+              <ordinal>9</ordinal>
+              <family>Give_Me_Some_Credit.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>26</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Min' datatype='integer'>0</statistic>
+                <statistic aggregation='Max' datatype='integer'>54</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint8&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>RevolvingUtilizationOfUnsecuredLines</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[RevolvingUtilizationOfUnsecuredLines]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>RevolvingUtilizationOfUnsecuredLines</remote-alias>
+              <ordinal>10</ordinal>
+              <family>Give_Me_Some_Credit.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>80199</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>568975.44936169346</statistic>
+                <statistic aggregation='Avg' datatype='real'>5.9832320244144643</statistic>
+                <statistic aggregation='Min' datatype='real'>0.0</statistic>
+                <statistic aggregation='Max' datatype='real'>50708.0</statistic>
+                <statistic aggregation='Stdev' datatype='real'>264.50222377332443</statistic>
+                <statistic aggregation='StdevP' datatype='real'>264.50083304342729</statistic>
+                <statistic aggregation='Var' datatype='real'>69961.426381033802</statistic>
+                <statistic aggregation='VarP' datatype='real'>69960.690680667001</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>6656316192.4077549</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>SeriousDlqin2yrs</remote-name>
+              <remote-type>16</remote-type>
+              <local-name>[SeriousDlqin2yrs]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>SeriousDlqin2yrs</remote-alias>
+              <ordinal>11</ordinal>
+              <family>Give_Me_Some_Credit.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>6287.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>0.066112834533887166</statistic>
+                <statistic aggregation='Min' datatype='integer'>0</statistic>
+                <statistic aggregation='Max' datatype='integer'>1</statistic>
+                <statistic aggregation='Stdev' datatype='real'>0.2484805362928286</statistic>
+                <statistic aggregation='StdevP' datatype='real'>0.24847922980358342</statistic>
+                <statistic aggregation='Var' datatype='real'>0.061742576916371708</statistic>
+                <statistic aggregation='VarP' datatype='real'>0.061741927643782023</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>6287.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>1</attribute>
+                <attribute datatype='integer' name='DebugRemoteMetadata (sort-position)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteMetadata (sort-sense)'>&quot;asc&quot;</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint8&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>age</remote-name>
+              <remote-type>16</remote-type>
+              <local-name>[age]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>age</remote-alias>
+              <ordinal>12</ordinal>
+              <family>Give_Me_Some_Credit.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>85</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>4970578.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>52.269604080130399</statistic>
+                <statistic aggregation='Min' datatype='integer'>0</statistic>
+                <statistic aggregation='Max' datatype='integer'>107</statistic>
+                <statistic aggregation='Stdev' datatype='real'>14.769832690699312</statistic>
+                <statistic aggregation='StdevP' datatype='real'>14.769755032191926</statistic>
+                <statistic aggregation='Var' datatype='real'>218.14795771125009</statistic>
+                <statistic aggregation='VarP' datatype='real'>218.1456637109587</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>280554706.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint8&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Age (bin)</remote-name>
+              <remote-type>16</remote-type>
+              <local-name>[Age (bin)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Age (bin)</remote-alias>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>10</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>454259.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>4.7768967874231034</statistic>
+                <statistic aggregation='Min' datatype='integer'>0</statistic>
+                <statistic aggregation='Max' datatype='integer'>10</statistic>
+                <statistic aggregation='Stdev' datatype='real'>1.5056648880215733</statistic>
+                <statistic aggregation='StdevP' datatype='real'>1.505656971365354</statistic>
+                <statistic aggregation='Var' datatype='real'>2.2670267550210168</statistic>
+                <statistic aggregation='VarP' datatype='real'>2.2670029154210902</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>2385529.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint8&quot;</attribute>
+              </attributes>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>SeriousDlqin2yrs (bin)</remote-name>
+              <remote-type>16</remote-type>
+              <local-name>[SeriousDlqin2yrs (bin)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>SeriousDlqin2yrs (bin)</remote-alias>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>false</contains-null>
+              <statistics>
+                <statistic aggregation='Sum' datatype='real'>6287.0</statistic>
+                <statistic aggregation='Avg' datatype='real'>0.066112834533887166</statistic>
+                <statistic aggregation='Min' datatype='integer'>0</statistic>
+                <statistic aggregation='Max' datatype='integer'>1</statistic>
+                <statistic aggregation='Stdev' datatype='real'>0.2484805362928286</statistic>
+                <statistic aggregation='StdevP' datatype='real'>0.24847922980358342</statistic>
+                <statistic aggregation='Var' datatype='real'>0.061742576916371708</statistic>
+                <statistic aggregation='VarP' datatype='real'>0.061741927643782023</statistic>
+                <statistic aggregation='Count' datatype='integer'>95095</statistic>
+                <statistic aggregation='SumXSqr' datatype='real'>6287.0</statistic>
+              </statistics>
+              <attributes>
+                <attribute datatype='integer' name='DebugRemoteMetadata (size)'>1</attribute>
+                <attribute datatype='string' name='DebugRemoteType'>&quot;sint8&quot;</attribute>
+              </attributes>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' dim-percentage='0.325726' measure-ordering='alphabetic' measure-percentage='0.674274' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;India&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Avg Income Age_bin wise'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Give_Me_Some_Credit' name='federated.17vcvdy19p9fje162rdc510xlyw0' />
+          </datasources>
+          <datasource-dependencies datasource='federated.17vcvdy19p9fje162rdc510xlyw0'>
+            <column aggregation='None' caption='Age_bin' datatype='integer' name='[Age (bin)]' role='dimension' type='ordinal'>
+              <calculation class='bin' decimals='1' formula='[age]' peg='0' size='10' />
+            </column>
+            <column caption='Monthly Income' datatype='real' name='[MonthlyIncome]' role='measure' type='quantitative' />
+            <column caption='Age' datatype='integer' name='[age]' role='measure' type='quantitative' />
+            <column-instance column='[MonthlyIncome]' derivation='Avg' name='[avg:MonthlyIncome:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Age (bin)]' derivation='None' name='[none:Age (bin):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[MonthlyIncome]' derivation='Sum' name='[sum:MonthlyIncome:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.17vcvdy19p9fje162rdc510xlyw0].[sum:MonthlyIncome:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.17vcvdy19p9fje162rdc510xlyw0].[avg:MonthlyIncome:qk]</rows>
+        <cols>[federated.17vcvdy19p9fje162rdc510xlyw0].[none:Age (bin):ok]</cols>
+      </table>
+    </worksheet>
+    <worksheet name='Defaulter vs Non_Defaulters '>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Give_Me_Some_Credit' name='federated.17vcvdy19p9fje162rdc510xlyw0' />
+          </datasources>
+          <datasource-dependencies datasource='federated.17vcvdy19p9fje162rdc510xlyw0'>
+            <column aggregation='None' caption='SeriousDlqin2yrs (bin)' datatype='integer' name='[SeriousDlqin2yrs (bin)]' role='dimension' type='ordinal'>
+              <calculation class='bin' decimals='0' formula='[SeriousDlqin2yrs]' peg='0' size='1' />
+            </column>
+            <column datatype='integer' name='[SeriousDlqin2yrs]' role='measure' type='quantitative' />
+            <column-instance column='[SeriousDlqin2yrs]' derivation='Count' name='[cnt:SeriousDlqin2yrs:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[SeriousDlqin2yrs (bin)]' derivation='None' name='[none:SeriousDlqin2yrs (bin):ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.17vcvdy19p9fje162rdc510xlyw0].[cnt:SeriousDlqin2yrs:qk]</rows>
+        <cols>[federated.17vcvdy19p9fje162rdc510xlyw0].[none:SeriousDlqin2yrs (bin):ok]</cols>
+        <show-full-range>
+          <column>[federated.17vcvdy19p9fje162rdc510xlyw0].[SeriousDlqin2yrs (bin)]</column>
+        </show-full-range>
+      </table>
+    </worksheet>
+    <worksheet name='Defaulters_Age_bin'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Give_Me_Some_Credit' name='federated.17vcvdy19p9fje162rdc510xlyw0' />
+          </datasources>
+          <datasource-dependencies datasource='federated.17vcvdy19p9fje162rdc510xlyw0'>
+            <column aggregation='None' caption='Age_bin' datatype='integer' name='[Age (bin)]' role='dimension' type='ordinal'>
+              <calculation class='bin' decimals='1' formula='[age]' peg='0' size='10' />
+            </column>
+            <column datatype='integer' name='[SeriousDlqin2yrs]' role='measure' type='quantitative' />
+            <column caption='Age' datatype='integer' name='[age]' role='measure' type='quantitative' />
+            <column-instance column='[Age (bin)]' derivation='None' name='[none:Age (bin):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[SeriousDlqin2yrs]' derivation='Sum' name='[sum:SeriousDlqin2yrs:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='color' field='[federated.17vcvdy19p9fje162rdc510xlyw0].[sum:SeriousDlqin2yrs:qk]' type='custom-interpolated'>
+              <color-palette custom='true' name='' type='ordered-sequential'>
+                <color>#f1f1f1</color>
+                <color>#f2e9da</color>
+                <color>#f3e2c3</color>
+                <color>#f5daab</color>
+                <color>#f6d294</color>
+                <color>#f8ca7c</color>
+                <color>#f9c264</color>
+                <color>#faba4b</color>
+                <color>#fcb233</color>
+                <color>#fdaa1a</color>
+                <color>#ffa201</color>
+              </color-palette>
+            </encoding>
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.17vcvdy19p9fje162rdc510xlyw0].[sum:SeriousDlqin2yrs:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.17vcvdy19p9fje162rdc510xlyw0].[sum:SeriousDlqin2yrs:qk]</rows>
+        <cols>[federated.17vcvdy19p9fje162rdc510xlyw0].[none:Age (bin):ok]</cols>
+        <show-full-range>
+          <column>[federated.17vcvdy19p9fje162rdc510xlyw0].[Age (bin)]</column>
+        </show-full-range>
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' name='Defaulter vs Non_Defaulters '>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.17vcvdy19p9fje162rdc510xlyw0].[none:SeriousDlqin2yrs (bin):ok]</field>
+          </color-one-way>
+        </highlight>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+    </window>
+    <window class='worksheet' name='Defaulters_Age_bin'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.17vcvdy19p9fje162rdc510xlyw0].[sum:SeriousDlqin2yrs:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.17vcvdy19p9fje162rdc510xlyw0].[none:Age (bin):ok]</field>
+            <field>[federated.17vcvdy19p9fje162rdc510xlyw0].[none:MonthlyIncome:nk]</field>
+            <field>[federated.17vcvdy19p9fje162rdc510xlyw0].[none:SeriousDlqin2yrs (bin):ok]</field>
+            <field>[federated.17vcvdy19p9fje162rdc510xlyw0].[sum:SeriousDlqin2yrs:qk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+    </window>
+    <window class='worksheet' maximized='true' name='Avg Income Age_bin wise'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.17vcvdy19p9fje162rdc510xlyw0].[sum:MonthlyIncome:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Avg Income Age_bin wise' width='192'>
+      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
+    </thumbnail>
+    <thumbnail height='192' name='Defaulter vs Non_Defaulters ' width='190'>
+      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
+      RK5CYII=
+    </thumbnail>
+    <thumbnail height='192' name='Defaulters_Age_bin' width='192'>
+      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
+    </thumbnail>
+  </thumbnails>
+</workbook>
