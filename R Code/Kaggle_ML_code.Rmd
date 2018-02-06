@@ -1,0 +1,357 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+  html_notebook: default
+  pdf_document: default
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+#Feature Selection
+#Plotting heat map for testing correlation between features
+require(ggplot2)
+require(reshape2)
+qplot(x=Var1,y=Var2,label=value,data=melt(cor(credit_train[,3:(ncol(credit_train)-1)],use="p")),fill=value,geom="tile")+scale_fill_gradient2(limits=c(1,-1)) 
+#High correlation observed between 4 features.On basis of the heat map,selected only one amongst correlated features
+
+#Using Boruta package for checking importance of variables
+set.seed(123)
+boruta.train<-Boruta(SeriousDlqin2yrs~.,data=credit_train,doTrace=2)
+plot(boruta.train,xlab = "", xaxt = "n")
+lz<-lapply(1:ncol(boruta.train$ImpHistory),function(i) boruta.train$ImpHistory[is.finite(boruta.train$ImpHistory[,i]),i])
+names(lz)<-colnames(boruta.train$ImpHistory)
+Labels<-sort(sapply(lz,median))
+axis(side = 1,las=2,labels = names(Labels),at=1:ncol(boruta.train$ImpHistory),cex.axis=.7)
+#All the variables deemed important except ID which was anyway not important.
+
+
+
+
+#Creating a pred_data from credit_dat[-train,](represents 1/3rd of credit_dat and removing NA's)
+pred_data<-pred_data[!is.na(pred_data$MonthlyIncome),]
+#Checking if pred_data contains any NA
+anyNA(pred_data)
+
+#Converting SeriousDlqin2Yrs from pred_data into factor
+pred_data$SeriousDlqin2yrs<-as.factor(pred_data$SeriousDlqin2yrs)
+
+
+
+
+#Fitting models
+  
+#Logistic Model
+#Scaling Income and constructing model based on three 4 variables as shown,na.action=na.omit
+log.mod<-glm(SeriousDlqin2yrs~age+RevolvingUtilizationOfUnsecuredLines+NumberOfOpenCreditLinesAndLoans+NumberOfDependents+NumberOfTime60.89DaysPastDueNotWorse,data=credit_train,family = "binomial",na.action = na.omit)
+#Predicting on pred_data and using response as output which fetches probability
+pred_log_mod<-predict(log.mod,newdata = pred_data,type = "response")
+#Classifying defaulter if prob>.5
+pred_Defaulter<-ifelse(pred_log_mod>.5,1,0)
+pred_log_dat<-cbind(pred_log_mod,pred_Defaulter)
+pred_log_dat<-as.data.frame(pred_log_dat)
+#Checking misclassification error
+mean(pred_log_dat$pred_Defaulter!=pred_data$SeriousDlqin2yrs)
+#Calculating AUC curve
+require(pROC)
+log.mod.roc<-roc(pred_data$SeriousDlqin2yrs,pred_log_dat$pred_Defaulter)
+#AUC is .5066
+
+
+#NaiveBayes
+require(e1071)
+nb.mod<-naiveBayes(SeriousDlqin2yrs~age+DebtRatio+RevolvingUtilizationOfUnsecuredLines+NumberOfOpenCreditLinesAndLoans+NumberOfDependents+NumberOfTime60.89DaysPastDueNotWorse,data=credit_train)
+#Predictions using NaiveBayes
+pred_nb_mod<-predict(nb.mod,newdata = pred_data)
+#Misclassification error
+mean(pred_nb_mod!=pred_data$SeriousDlqin2yrs)
+#error is .061586
+#ROC
+nb.roc<-roc(pred_nb_mod,as.numeric(pred_data$SeriousDlqin2yrs))
+#AUC is .6771
+
+               
+#RandomForest
+#Fitting a RF model on the train dataset and giving pred_col as test dataset.
+require(randomForest)
+rF.mod<-randomForest(SeriousDlqin2yrs~age+RevolvingUtilizationOfUnsecuredLines+NumberOfOpenCreditLinesAndLoans+NumberOfDependents+NumberOfTime60.89DaysPastDueNotWorse,data = credit_train,xtest=pred_col[,-2],ytest=as.factor(pred_data$SeriousDlqin2yrs),ntree=200,importance=T)
+
+#misclassification error
+mean(rF.mod$test$predicted!=pred_data$SeriousDlqin2yrs)
+#misclassification error rate is .0692
+#ROC
+rF.roc<-roc(pred_data$SeriousDlqin2yrs,as.numeric(paste(rF.mod$test$predicted)))
+#AUC came out to be .6129
+
+
+
+
+#Gradient Boosting Machine
+require(gbm)
+gbm.mod<-gbm(as.character(SeriousDlqin2yrs)~age+RevolvingUtilizationOfUnsecuredLines+NumberOfOpenCreditLinesAndLoans+NumberOfDependents+NumberOfTime60.89DaysPastDueNotWorse,distribution = "bernoulli",data=credit_train,n.trees = 1000,interaction.depth = 2,shrinkage = .01)
+#Summary gives var influence chart
+summary(gbm.mod)
+#For predicting we create a var,so as to iterate over 1000 trees in chunks of 100's
+n.tree<-seq(from=100,to=1000,by=100)
+#Predicting on test
+pred_gbm_mod<-predict.gbm(gbm.mod,pred_data,n.trees = n.tree,type = "response")
+#Taking mean from predicted values 
+pred_gbm_mod<-apply(pred_gbm_mod,1,mean)
+#Classifying
+pred_gbm_default<-ifelse(pred_gbm_mod>.5,1,0)
+#Creating data frame of predicted classes
+pred_gbm_mod<-as.data.frame(cbind(pred_gbm_mod,pred_gbm_default))
+#misclassification error
+mean(pred_gbm_mod$pred_gbm_default!=pred_data$SeriousDlqin2yrs)
+#ROC
+gbm.roc<-roc(pred_data$SeriousDlqin2yrs,pred_gbm_mod$pred_gbm_default)
+#AUC turns out to be .5226
+
+
+
+#XGBoost
+#Fitting model
+require(xgboost)
+credit_col<-data.matrix(credit_train[,c("age","DebtRatio","RevolvingUtilizationOfUnsecuredLines","NumberOfOpenCreditLinesAndLoans","NumberOfDependents","NumberOfTime60.89DaysPastDueNotWorse")])
+xgb.mod<-xgboost(data=credit_col,label =credit_pred,nrounds = 2,objective="binary:logistic")
+#Predicting on pred_col using xgb.mod
+pred_xgb_mod<-predict(xgb.mod,newdata =as.matrix(pred_col))
+pred_xgb_default<-ifelse(pred_xgb_mod>.5,1,0)
+#Creating a dataframe with pertinent classification
+pred_xgb_mod<-cbind.data.frame(pred_xgb_mod,pred_xgb_default)
+#misclassification error
+mean(pred_data$SeriousDlqin2yrs!=pred_xgb_mod$pred_xgb_default)
+#error is .187987
+#Creating a roc object so as to get AUC
+xgb.roc<-roc(pred_data$SeriousDlqin2yrs,pred_xgb_mod$pred_xgb_default)
+#AUC is .6457
+
+
+
+
+
+#SMOTE 
+#Creating a SMOTE dataset with over-sampling minorty class 5 times 
+smote_credit<-SMOTE(SeriousDlqin2yrs~age+DebtRatio+RevolvingUtilizationOfUnsecuredLines+NumberOfOpenCreditLinesAndLoans+NumberOfDependents+NumberOfTime60.89DaysPastDueNotWorse,data=credit_train,perc.over = 100,k=5,perc.under=500) 
+#Dataset created has a distribution of about 3:1
+
+
+#Fitting Models
+#Using logistic regression for classification
+smote.log.credit<-glm(SeriousDlqin2yrs~age+DebtRatio+RevolvingUtilizationOfUnsecuredLines+NumberOfOpenCreditLinesAndLoans+NumberOfDependents+NumberOfTime60.89DaysPastDueNotWorse,family="binomial",data=smote_credit)
+#Predictions using log model on pred_data
+pred_smote_log<-predict(smote.log.credit,newdata = pred_data,type="response")
+#Classifying to classes according to threeshold .5
+pred_smote_log<-ifelse(pred_smote_log>.5,1,0)
+#Misclassification error
+mean(pred_data$SeriousDlqin2yrs!=pred_smote_log)
+#AUC 
+require(pROC)
+auc.smote.log<-roc(as.numeric(paste(pred_data$SeriousDlqin2yrs)),as.numeric(paste(pred_smote_log)))
+#AUC comes to .6611
+
+
+
+#Using randomforest for classification
+require(randomForest)
+smote.rF.credit<-randomForest(SeriousDlqin2yrs~age+DebtRatio+RevolvingUtilizationOfUnsecuredLines+NumberOfOpenCreditLinesAndLoans+NumberOfDependents+NumberOfTime60.89DaysPastDueNotWorse,data=smote_credit,ntree=500,mtry=3,importance=T)
+#Predicting using RF model 
+pred_smote_rF<-predict(smote.rF.credit,newdata=pred_data,type="prob")
+#Misclassification error
+mean(pred_smote_rF!=pred_data$SeriousDlqin2yrs)
+#Calculating AUC
+auc.smote.rF<-roc(pred_data$SeriousDlqin2yrs,as.numeric(paste(pred_smote_rF)))
+#AUC is .6371
+
+
+
+
+#Using GBM for classification
+require(gbm)
+smote.gbm.credit<-gbm(as.character(SeriousDlqin2yrs)~age+DebtRatio+RevolvingUtilizationOfUnsecuredLines+NumberOfOpenCreditLinesAndLoans+NumberOfDependents+NumberOfTime60.89DaysPastDueNotWorse,distribution = "bernoulli",n.trees = 1000,data=smote_credit,interaction.depth=2,shrinkage=.01)
+#Predicting using GBM
+pred_smote_gbm<-predict.gbm(smote.gbm.credit,pred_data,n.trees =n.tree,type = "response")
+#Taking mean for different probabilities and creating a vector out of it
+pred.smote.gbm<-apply(pred_smote_gbm,1,mean)
+#Classifying according to threeshold of .5
+pred.smote.gbm<-ifelse(pred.smote.gbm>.5,1,0)
+#Misclassification error
+mean(pred.smote.gbm!=pred_data$SeriousDlqin2yrs)
+#Calculating AUC
+auc.smote.gbm<-roc(as.numeric(pred_data$SeriousDlqin2yrs),pred.smote.gbm)
+#AUC is .6188
+
+#Using XGBoost for classification
+require(xgboost)
+#Using the same credit_col dataframe created earlier
+smote.xgboost.credit<-xgboost(params = list("eta"=.3,"objective"="binary:logistic","max_depth"=2),data=as.matrix(smote_credit[,c("age","DebtRatio","RevolvingUtilizationOfUnsecuredLines","NumberOfOpenCreditLinesAndLoans","NumberOfDependents","NumberOfTime60.89DaysPastDueNotWorse")]),label=as.numeric(paste(smote_credit$SeriousDlqin2yrs)),nrounds=2)
+#Predicting using xgboost model on pred_col
+pred_smote_xgboost<-predict(smote.xgboost.credit,newdata=as.matrix(pred_data[,-c(1:2,5,7,12)]))
+#Assigning classes using threeshold of .63
+pred_smote_xgboost<-ifelse(pred_smote_xgboost>.63,1,0)
+#Misclassification error
+mean(pred_smote_xgboost!=pred_data$SeriousDlqin2yrs)
+#AUC 
+auc.smote.xgboost<-roc(pred_data$SeriousDlqin2yrs,pred_smote_xgboost)
+#AUC is .5386
+
+
+
+#Using Naive Bayes as classification algorithm
+require(e1071)
+smote.mod.credit<-naiveBayes(SeriousDlqin2yrs~age+DebtRatio+RevolvingUtilizationOfUnsecuredLines+NumberOfOpenCreditLinesAndLoans+NumberOfDependents+NumberOfTime60.89DaysPastDueNotWorse,data=smote_credit)
+#Predicting using NB model fitted on smote dataset
+pred_smote_nb<-predict(smote.mod.credit,newdata = pred_data)
+pred_smote_nb_score<-predict(smote.mod.credit,newdata = pred_data,type="raw")
+#Mis-classification error
+mean(pred_smote_nb!=pred_data$SeriousDlqin2yrs)
+#Calculating auc
+auc.smote.nb<-roc(pred_data$SeriousDlqin2yrs,pred_smote_nb_score[,2])
+#AUC is coming to about .7338
+
+
+
+
+#Ensemble
+#Creating a dataframe out of predictions of all applied models
+pred_ensemble_smote<-as.data.frame(cbind(pred_smote_log,as.numeric(paste(pred_smote_rF)),pred.smote.gbm,pred_smote_xgboost,as.numeric(paste(pred_smote_nb))))
+#Creating a vector of length=nrow(pred_data_frame)
+final_pred<-rep(0,nrow(pred_ensemble_smote))
+#pred_ensemble_smote<-pred_ensemble_smote[,-6]
+
+for(i in 1:nrow(pred_ensemble_smote))
+{
+   #print(sum(predicted[i,]))
+   final_pred[i]<-sum(pred_ensemble_smote[i,])
+ 
+}
+#Criteria used for classification is,if 2 or more than 2 models predict a default,in the ensemble it will be classified as default
+final_pred<-ifelse(final_pred>=2,1,0)
+pred_ensemble_smote<-cbind.data.frame(pred_ensemble_smote,final_pred)
+#Misclassification Error
+mean(pred_data$SeriousDlqin2yrs!=pred_ensemble_smote$final_pred)
+#AUC
+auc.smote.ensemble<-roc(pred_data$SeriousDlqin2yrs,pred_ensemble_smote$final_pred)
+#AUC is .6736
+
+
+#NEURAL NET
+require(h2o)
+#Fitting neural net
+cre_tra<-as.h2o(credit_train)
+nn.mod<-h2o.deeplearning(x=c("age","DebtRatio","RevolvingUtilizationOfUnsecuredLines","NumberOfOpenCreditLinesAndLoans","NumberOfDependents","NumberOfTime60.89DaysPastDueNotWorse"),y="SeriousDlqin2yrs",training_frame = cre_tra,activation = "RectifierWithDropout",epochs=10,loss = "CrossEntropy",distribution = "bernoulli",stopping_metric = "AUC")
+
+#Prediction on pred_data
+pred_nn_credit<-h2o.predict(nn.mod,newdata=p_cred)
+
+#Misclassification error
+mean(pred_data$SeriousDlqin2yrs!=pred_nn_cred$predict)
+#Misclassification error turns to out to be .179
+
+#AUC calculation
+require(pROC)
+auc.credit.nn<-roc(pred_data$SeriousDlqin2yrs,as.numeric(paste(pred_nn_cred$predict)))
+
+
+#Fitting neural net on smote dataset
+smote_cre<-as.h2o(smote_cred)
+nn.smote.mod<-h2o.deeplearning(x=c("age","RevolvingUtilizationOfUnsecuredLines","NumberOfOpenCreditLinesAndLoans","NumberOfDependents","NumberOfTime60.89DaysPastDueNotWorse"),y="SeriousDlqin2yrs",training_frame = smote_cre,activation = "RectifierWithDropout",epochs=10,loss= "CrossEntropy",distribution="bernoulli",stopping_metric="AUC")
+#Predictions on pred_data
+p_cred<-as.h2o(pred_data)
+pred_smote_nn<-h2o.predict(nn.smote.mod,newdata = p_cred)
+#Misclassifcation error
+mean(pred_data$SeriousDlqin2yrs!=pred_smote_nn_df$predict)
+#AUC
+auc.smote.nn<-roc(pred_data$SeriousDlqin2yrs,as.numeric(paste(pred_smote_nn_df$predict)))
+#AUC comes out to be .7155
+
+
+#Optimizing NN
+#Using grid search so as to find best parameters for Neural Net
+#Creating hyperparameter list to be given as input to grid serach
+hyper_param<-list(activation=c("Rectifier","Maxout","Tanh","RectifierWithDropout","MaxoutWithDropout","TanhWithDropout"),hidden=list(c(50,50,50),c(100,100,100),c(300,300,300),c(400,400,400)),epochs=c(50,100,200),l1=c(0,0.00001,.0001),l2 = c(0, 0.00001, 0.0001),rate = c(0,.01, 0.005, 0.001),rate_annealing = c(1e-8, 1e-7, 1e-6),rho= c(0.9, 0.95, 0.99, 0.999),epsilon = c(1e-10, 1e-8, 1e-6, 1e-4),momentum_start = c(0, 0.5),momentum_stable = c(0.99, 0.5, 0),input_dropout_ratio = c(0, 0.1, 0.2),max_w2 = c(10, 100, 1000, 3.4028235e+38))
+
+search_crit<-list(strategy = "RandomDiscrete",stopping_metric="AUC", max_models=10,max_runtime_secs=900,stopping_tolerance = 0.001,stopping_rounds=15,seed=42)
+
+d1_grid<-h2o.grid(algorithm = "deeplearning",x=c("age","RevolvingUtilizationOfUnsecuredLines","NumberOfOpenCreditLinesAndLoans","NumberOfDependents","NumberOfTime60.89DaysPastDueNotWorse"),y="SeriousDlqin2yrs",training_frame = smote_cred_1,grid_id="d1_grid",hyper_params=hyper_param,search_criteria = search_crit,seed=42)
+
+#Grid Search results:
+#Activation:"MaxWithDropout"
+#Hidden:[400,400,400]
+#Epochs:200
+
+
+#Constructing a Neural Net model based on results of grid search
+nn.gs.mod<-h2o.deeplearning(x=c("age","RevolvingUtilizationOfUnsecuredLines","NumberOfOpenCreditLinesAndLoans","NumberOfDependents","NumberOfTime60.89DaysPastDueNotWorse"),y="SeriousDlqin2yrs",training_frame = smote_cre,activation = "MaxoutWithDropout",epochs=200,loss= "CrossEntropy",distribution="bernoulli",stopping_metric="AUC",hidden=c(400,400,400),rate=1,epsilon=1.0E-8,rho = .9)
+#Predictions using grid search model
+p_cred<-as.h2o(pred_data)
+gs.pred<-h2o.predict(nn.gs.mod,newdata=p_cred)
+#AUC
+require(pROC)
+auc.gs.nn<-roc(pred_data$SeriousDlqin2yrs,as.numeric(paste(gs.pred$predict)))
+#AUC is .713
+
+
+
+#PLOT
+#Barplot for AUC metric for various algorithms applied
+
+#Normal data
+require(ggplot2)
+require(ggthemes)
+
+ggplot(data=agg_auc,aes(reorder(agg_auc$algo,agg_auc$AUC),agg_auc$AUC,fill=algo))+geom_bar(stat="identity",position="dodge",width=.5)+geom_text(aes(label=round(agg_auc$AUC,3)),position = position_stack(vjust = .5),vjust=-.5)+xlab("Model")+ylab("AUC")+ggtitle("AUC:Normal Data")+scale_fill_manual(values = c("Neural Net"="sky blue","GBM"="orange","Logistic_regression"="orange","Naive_Bayes"="orange","Random_Forest"="orange","XGBoost"="orange"))+theme_economist_white()+theme(plot.title = element_text(size=14,face="bold"),axis.title.x = element_text(size=14,face="bold"),axis.title.y = element_text(size=14,face="bold"))
+
+
+
+#Smote Dataset
+Algo<-c("Log_R","NB","RF","GBM","XGB","Ensemble","NN")
+AUC<-c(auc.smote.log$auc,auc.smote.nb$auc,auc.smote.rF$auc,auc.smote.gbm$auc,auc.smote.xgboost$auc,auc.smote.ensemble$auc,auc.smote.nn$auc)  
+Agg_auc_smote<-cbind.data.frame(Algo,AUC)
+#Barplot
+ggplot(data=Agg_auc_smote,aes(reorder(Agg_auc_smote$Algo,Agg_auc_smote$AUC),Agg_auc_smote$AUC,fill=ALGO))+geom_bar(stat="identity",position="dodge",width=.5)+geom_text(aes(label=round(Agg_auc_smote$AUC,3)),position = position_stack(vjust=.5),vjust=-.5)+xlab("Model")+ylab("AUC")+ggtitle("AUC:Smote Data")+scale_fill_manual(values = c("NN"="orange","GBM"="orange","Log_R"="orange","NB"="sky blue","RF"="orange","XGB"="orange","Ensemble"="orange"))+theme_economist_white()+theme(plot.title = element_text(size=14,face="bold"),axis.title.x = element_text(size=14,face="bold"),axis.title.y = element_text(size=14,face="bold"))
+
+
+
+
+#Predictions on test data
+h2o.init()
+#Creating h2o object for credit_test
+test_data<-as.h2o(credit_test)
+
+
+#Predictions
+pred_test<-h2o.predict(nn.smote.mod,newdata = test_data)
+cre_test_pred<-as.data.frame(pred_test)
+#Dataframe from h2o object
+View(cre_test_pred)
+class_prob<-ifelse(cre_test_pred$p0>cre_test_pred$p1,cre_test_pred$p0,cre_test_pred$p1)
+
+
+
+
+#Predictions for single row of data
+data<-cbind.data.frame('age'=50,'RevolvingUtilizationOfUnsecuredLines'=.5,'NumberOfOpenCreditLinesAndLoans'=16,'NumberOfDependents'=2,'NumberOfTime60.89DaysPastDueNotWorse'=0)
+d<-as.h2o(data)
+
+#Predictions
+pred_row<-h2o.predict(nn.smote.mod,newdata=d)
+pred_single<-as.data.frame(pred_row)
+#We get class probabilities for both classes for a single row.
+
+
+
+
+```
+
+```{r}
+ 
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).

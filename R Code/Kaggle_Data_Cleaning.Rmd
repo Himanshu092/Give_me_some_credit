@@ -1,0 +1,70 @@
+---
+title: "Kaggle_Data_prep"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+
+credit_dat<-read.csv("Give_Me_Some_Credit.csv")
+set.seed(101)
+train<-sample(nrow(credit_dat),(2/3)*nrow(credit_dat))
+credit_train<-credit_dat[train,]
+Defaulter<-ifelse(credit_train$SeriousDlqin2yrs==0,"N","Y")
+credit_train<-cbind.data.frame(credit_train,Defaulter)
+
+
+
+#Data Prep
+#Calculating Mean(MonthlyIncome) according to agebins and replacing NA's with correponding values
+
+age_Income<-function(train_data,limit,x=20)
+{
+  temp_mean<-rep(0,length = limit/10)
+  
+  for(i in 1:(limit/10))
+   { temp_mean[i]<-mean(train_data[which((train_data$      age 
+     %in% 
+     c(x:x+10))),"MonthlyIncome"],na.rm=TRUE)
+     print(temp_mean)
+     
+     x=x+10
+   }
+}
+
+#Calling function
+age_Income(credit_train,70)
+#Limit is 70 as we want to compute Income mean's upto 90 yrs age bin
+
+
+
+
+#Unexpectedly RevolvingUtilizationofUnsecuredcreditlines is >1 in some of the rows which can be an anamoly
+credit_train<-credit_train[-which(credit_train$RevolvingUtilizationOfUnsecuredLines>1),]
+#Removing NA's from MonthlyIncome
+credit_train<-credit_train[-which(is.na(credit_train$MonthlyIncome)),]
+#Removing NA's from NumberOfDependents
+credit_train<-credit_train[-which(is.na(credit_train$NumberOfDependents)),]
+
+
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
